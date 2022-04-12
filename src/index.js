@@ -5,12 +5,17 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "flowbite";
 import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
+import shopStore from '../src/redux/store'
+
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <Provider store={shopStore}>
+      <BrowserRouter  >
+        <App />
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );

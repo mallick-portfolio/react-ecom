@@ -2,9 +2,15 @@ import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import { faCartArrowDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import {  useParams } from "react-router-dom";
+import { addToCart } from "../../redux/action";
+
+
+
 
 const Details = () => {
+
   let params = useParams();
   const [product, setProduct] = useState("");
   const { title, price, image, description, category } = product;
@@ -14,6 +20,15 @@ const Details = () => {
       .then((res) => res.json())
       .then((data) => setProduct(data));
   }, [params.id]);
+
+
+  const dispatch = useDispatch()
+  const addProduct = (product) => {
+    dispatch(addToCart(product))
+  }
+  
+
+
 
   return (
     <div className="container my-10 grid sm:grid-cols-2">
@@ -40,18 +55,17 @@ const Details = () => {
             {description}
           </p>
           <div>
-          <Link
-            to="/"
+          <button
+          onClick={()=> addProduct(product)}
             className="inline-flex items-center py-3 px-5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           >
             Add To Cart <FontAwesomeIcon className="ml-2" icon={faCartArrowDown} />
-          </Link>
-          <Link
-            to="/"
+          </button>
+          <button
             className="inline-flex ml-5 items-center py-3 px-5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           >
             Make Favorite <FontAwesomeIcon className="ml-2" icon={faHeart} />
-          </Link>
+          </button>
           </div>
         </div>
       </div>
