@@ -1,14 +1,12 @@
-import { useState } from "react/cjs/react.development"
-import { useEffect } from "react/cjs/react.production.min"
+import  { useState, useEffect } from 'react';
+
 
 const useProducts = () => {
   const [products, setProducts] = useState([])
   useEffect(()=> {
     fetch('https://fakestoreapi.com/products')
     .then(res => res.json())
-    .then(data => setProducts(data))
-
-
+    .then(data => console.log(data))
     
   }, [])
 
